@@ -1,0 +1,91 @@
+<!DOCTYPE>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Matrix</title>
+		<style>
+			.matrixHandle
+			{
+				display:inline-block;
+				width: 10px;
+				height: 10px;
+				background: green;
+			}
+			.matrixHolder
+			{
+				border:black solid 1px;
+				display:inline-block;
+				padding: 10px;
+			}
+			.matrix
+			{
+				border:red solid 1px;
+				display:inline-block;
+				padding: 5px;
+			}
+			.matrix-cell
+			{
+				width: 35px;
+			}
+			.sizeInput
+			{
+				width: 25px;
+			}
+			#dialog
+			{
+				border:solid 1px;
+			}
+		</style>
+		<script src="jquery-2.0.3.min.js"></script>
+		<script src="jquery-ui.min.js"></script>
+		<script src="matrix.js"></script>
+		<script>
+			var idindex = 1;
+			var matrices = {};
+			$(function(){
+				console.debug('document reaady!');
+				$("#addBtn").click(function(){
+					console.debug('clicked addBtn');
+					createMatrix();
+				});
+
+				$("#helpBtn").click(function(){
+					var str = '';
+					str+='Help\n';
+					str+='ลาก -> สีเขียว\n';
+					str+='เปลี่ยนขนาด -> ใส่เลขช่องสี่เหลี่ยมบนซ้าย\n';
+					str+='A+B -> บวกเอง\n';
+					str+='A*B -> ลาก A ทับ B\n';
+					alert(str);
+				});
+				$( "#dialog" ).dialog({
+					autoOpen: false,
+					show: {
+						effect: "fade",
+						duration: 1000
+					},
+					hide: {
+						effect: "fade",
+						duration: 1000
+					}
+				});
+				
+			});
+
+			function createMatrix()
+			{
+				var id = "matrix-"+idindex++;
+				$("body").append("<div id='"+id+"' class='matrixHolder'></div>");
+				matrices[id] = new Matrix(id);
+				return id;
+			}
+		</script>
+	</head>
+	<body>
+		<button id="addBtn">Add</button>
+		<button id="helpBtn">Help</button>
+		<div id="dialog" title="Matrix operation">
+			Sample Text
+		</div>
+	</body>
+</html>
